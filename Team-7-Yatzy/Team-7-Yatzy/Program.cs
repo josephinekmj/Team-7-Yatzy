@@ -390,6 +390,96 @@ namespace Team_7_Yatzy
                                         else
                                             P1seksere = 0;
                                         break;
+                                    case "A":
+                                        player1 = false;
+                                        if (etPar)
+                                            if (terning1 == terning2)
+                                                P1etPar = (terning1 + terning2);
+                                            else if (terning1 == terning3)
+                                                P1etPar = (terning1 + terning3);
+                                            else if (terning1 == terning4)
+                                                P1etPar = (terning1 + terning4);
+                                            else if (terning1 == terning5)
+                                                P1etPar = (terning1 + terning5);
+                                        else
+                                            P1etPar = 0;
+                                        break;
+                                    case "B":
+                                        player1 = false;
+                                        if (toPar)
+                                            if ((terning1 == terning2) && (terning3 == terning4) ||
+                                                (terning1 == terning3) && (terning2 == terning4) ||
+                                                (terning1 == terning4) && (terning2 == terning3))
+                                                P1toPar = (terning1 + terning2 + terning3 + terning4);
+                                            else if ((terning1 == terning2) && (terning3 == terning5) ||
+                                                    (terning1 == terning3) && (terning2 == terning5) ||
+                                                    (terning1 == terning5) && (terning2 == terning3))
+                                                    P1toPar = (terning1 + terning2 + terning3 + terning5);
+                                            else if ((terning1 == terning2) && (terning4 == terning5) ||
+                                                    (terning1 == terning4) && (terning2 == terning5) ||
+                                                    (terning1 == terning5) && (terning2 == terning4))
+                                                    P1toPar = (terning1 + terning2 + terning4 + terning5);
+                                        else
+                                            P1toPar = 0;
+                                        break;
+                                    case "C":
+                                        player1 = false;
+                                        if (treEns)
+                                            if (sum1 == 3)
+                                                P1treEns = sum1;
+                                            else if (sum2 == 3)
+                                                P1treEns = (sum2 * 2);
+                                            else if (sum3 == 3)
+                                                P1treEns = (sum3 * 3);
+                                            else if (sum4 == 3)
+                                                P1treEns = (sum4 * 4);
+                                            else if (sum5 == 3)
+                                                P1treEns = (sum5 * 5);
+                                            else
+                                                P1treEns = 0;
+                                        break;
+                                    case "D":
+                                        player1 = false;
+                                        if (fireEns)
+                                            if (sum1 >= 4)
+                                                P1fireEns = sum1;
+                                            else if (sum2 >= 4)
+                                                P1fireEns = (sum2 * 2);
+                                            else if (sum3 >= 4)
+                                                P1fireEns = (sum3 * 3);
+                                            else if (sum4 >= 4)
+                                                P1fireEns = (sum4 * 4);
+                                            else if (sum5 >= 4)
+                                                P1fireEns = (sum5 * 5);
+                                            else
+                                                P1fireEns = 0;
+                                        break;
+                                    case "E":
+                                        player1 = false;
+                                        if (smallStraight)
+                                            P1lilleStraight = 15;
+                                        else
+                                            P1lilleStraight = 0;
+                                        break;
+                                    case "F":
+                                        player1 = false;
+                                        if (storeStraight)
+                                            P1storeStraight = 20;
+                                        else
+                                            P1storeStraight = 0;
+                                        break;
+                                    case "G":
+                                        player1 = false;
+                                        //if (fuldtHus)
+                                    break;
+                                    case "I":
+                                        player1 = false;
+                                        if (yatzy)
+                                            if ((sum1 == 5) || (sum2 == 5) || (sum3 == 5) || (sum4 == 5) || (sum5 == 5))
+                                                P1yatzy = 50;
+                                            else
+                                                P1yatzy = 0;
+                                        break;
                                     default:
                                         player1 = false;
                                         break;
@@ -437,35 +527,44 @@ namespace Team_7_Yatzy
                 // Vores Scoreboard
                 //
 
+                int P1sum = (P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere);
+                int P2sum = (P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere);
+                int bonus1 = (P1sum >= 63) ? 50 : 0;
+                int bonus2 = (P2sum >= 63) ? 50 : 0;
+                int bonusSum1 = (P1sum + bonus1);
+                int bonusSum2 = (P2sum + bonus2);
+
+
                 Console.WriteLine("Runde: " + roundsCounter);
                 Console.WriteLine("SCOREBOARD:");
-                Console.WriteLine("------------------ \t {0,3} \t|\t {1,3}", "P1", "P2");
-                Console.WriteLine("---------1 - 1'ere: \t {0,3} \t|\t {1,3}", P1ettere, P2ettere);
-                Console.WriteLine("---------2 - 2'ere: \t {0,3} \t|\t {1,3}", P1toere, P2toere);
-                Console.WriteLine("---------3 - 3'ere: \t {0,3} \t|\t {1,3}", P1treere, P2treere);
-                Console.WriteLine("---------4 - 4'ere: \t {0,3} \t|\t {1,3}", P1firere, P2firere);
-                Console.WriteLine("---------5 - 5'ere: \t {0,3} \t|\t {1,3}", P1femmere, P2femmere);
-                Console.WriteLine("---------6 - 6'ere: \t {0,3} \t|\t {1,3}", P1seksere, P2seksere);
-                Console.WriteLine("______________________________________________________");
-                Console.WriteLine("---------------Sum: \t " + (P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere) + " \t|\t " + (P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere));
-                Console.WriteLine("______________________________________________________");
-                Console.WriteLine("Bonus v. 63 points: +50 point (ekstra kode indsættes) ");
+                Console.WriteLine("------------------------------ \t {0,3} \t|\t {1,3}", "P1", "P2");
+                Console.WriteLine("--------------------1 - 1'ere: \t {0,3} \t|\t {1,3}", P1ettere, P2ettere);
+                Console.WriteLine("--------------------2 - 2'ere: \t {0,3} \t|\t {1,3}", P1toere, P2toere);
+                Console.WriteLine("--------------------3 - 3'ere: \t {0,3} \t|\t {1,3}", P1treere, P2treere);
+                Console.WriteLine("--------------------4 - 4'ere: \t {0,3} \t|\t {1,3}", P1firere, P2firere);
+                Console.WriteLine("--------------------5 - 5'ere: \t {0,3} \t|\t {1,3}", P1femmere, P2femmere);
+                Console.WriteLine("--------------------6 - 6'ere: \t {0,3} \t|\t {1,3}", P1seksere, P2seksere);
+                Console.WriteLine("_______________________________________________________________");
+                Console.WriteLine("--------------------------Sum: \t {0,3} \t|\t {1,3}", P1sum, P2sum);
+                Console.WriteLine("_______________________________________________________________");
+                Console.WriteLine("Bonus v. 63 points, +50 point: \t {0,3} \t|\t {1,3}", bonusSum1, bonusSum2);
 
-                Console.WriteLine("--------A - et par: \t {0,3} \t|\t {1,3}", P1etPar, P2etPar);
-                Console.WriteLine("--------B - to par: \t {0,3} \t|\t {1,3}", P1toPar, P2toPar);
-                Console.WriteLine("-------C - tre ens: \t {0,3} \t|\t {1,3}", P1treEns, P2treEns);
-                Console.WriteLine("------D - fire ens: \t {0,3} \t|\t {1,3}", P1fireEns, P2fireEns);
 
-                Console.WriteLine("E - lille straight: \t {0,3} \t|\t {1,3}", P1lilleStraight, P2lilleStraight);
-                Console.WriteLine("-F - stor straight: \t {0,3} \t|\t {1,3}", P1storeStraight, P2storeStraight);
+                Console.WriteLine("-------------------A - et par: \t {0,3} \t|\t {1,3}", P1etPar, P2etPar);
+                Console.WriteLine("-------------------B - to par: \t {0,3} \t|\t {1,3}", P1toPar, P2toPar);
+                Console.WriteLine("------------------C - tre ens: \t {0,3} \t|\t {1,3}", P1treEns, P2treEns);
+                Console.WriteLine("-----------------D - fire ens: \t {0,3} \t|\t {1,3}", P1fireEns, P2fireEns);
 
-                Console.WriteLine("-----G - fuldt hus: \t {0,3} \t|\t {1,3}", P1fuldtHus, P2fuldtHus);
-                Console.WriteLine("--------H - CHANCE: \t {0,3} \t|\t {1,3}", P1chance, P2chance);
-                Console.WriteLine("---------I - YATZY: \t {0,3} \t|\t {1,3}", P1yatzy, P2yatzy);
+                Console.WriteLine("-----------E - lille straight: \t {0,3} \t|\t {1,3}", P1lilleStraight, P2lilleStraight);
+                Console.WriteLine("------------F - stor straight: \t {0,3} \t|\t {1,3}", P1storeStraight, P2storeStraight);
 
-                Console.WriteLine("______________________________________________________");
-                Console.WriteLine("-------------Total: \t " + (P1result = P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere + P1etPar + P1toPar + P1treEns + P1fireEns + P1lilleStraight + P1storeStraight + P1fuldtHus + P1chance + P1yatzy) + " \t|\t " + (P2result = P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere + P2etPar + P2toPar + P2treEns + P2fireEns + P2lilleStraight + P2storeStraight + P2fuldtHus + P2chance + P2yatzy));
-                Console.WriteLine("______________________________________________________");
+                Console.WriteLine("----------------G - fuldt hus: \t {0,3} \t|\t {1,3}", P1fuldtHus, P2fuldtHus);
+                Console.WriteLine("-------------------H - CHANCE: \t {0,3} \t|\t {1,3}", P1chance, P2chance);
+                Console.WriteLine("--------------------I - YATZY: \t {0,3} \t|\t {1,3}", P1yatzy, P2yatzy);
+
+                Console.WriteLine("_______________________________________________________________");
+                Console.WriteLine("------------------------Total: \t " + (P1result = P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere + bonusSum1 + P1etPar + P1toPar + P1treEns + P1fireEns + P1lilleStraight + P1storeStraight + P1fuldtHus + P1chance + P1yatzy) + " \t|\t " + (P2result = P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere + bonusSum2+ P2etPar + P2toPar + P2treEns + P2fireEns + P2lilleStraight + P2storeStraight + P2fuldtHus + P2chance + P2yatzy));
+                Console.WriteLine("_______________________________________________________________");
 
 
                 //Console.WriteLine("Tryk på en tast for at gå til næste runde");
