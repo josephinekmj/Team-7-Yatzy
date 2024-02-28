@@ -1,4 +1,6 @@
-﻿namespace Team_7_Yatzy
+﻿using System;
+
+namespace Team_7_Yatzy
 {
     internal class Program
     {
@@ -13,9 +15,15 @@
             return r;
         }
 
-
         static void Main(string[] args)
         {
+
+
+            //
+            // Variabler
+            //
+
+            // bools der fortæller om betingelserne for en kombination er opnået - sat til false da ingen spillere har haft en tur endnu
             bool ettere = false;
             bool toere = false;
             bool treere = false;
@@ -33,9 +41,16 @@
             bool fuldtHus = false;
             bool yatzy = false;
 
+
+
+            // bool der bestemmer spillernes tur - første spiller starter, falsk når det skal være anden spillers tur
+            bool player1 = true;
+
+            // strings brugt til brugerens menu-valg
             string diceChoice = "";
             string scoreboardChoice = "";
 
+            // int variabler brugt til at gemme summen af terninger med x antal øjne
             int sum1 = 0;
             int sum2 = 0;
             int sum3 = 0;
@@ -43,184 +58,14 @@
             int sum5 = 0;
             int sum6 = 0;
 
-
+            // Her erklærer vi terningerne som int variable, laver et nyt objekt af Random klassen, men initialisere terning1-5 til 0;
             int terning1, terning2, terning3, terning4, terning5;
-
             Random r = new Random();
-
             terning1 = 0;
             terning2 = 0;
             terning3 = 0;
             terning4 = 0;
             terning5 = 0;
-
-            //SumOfNumberOfEyes(int eyes, int t1, int t2, int t3, int t4, int t5)
-            sum1 = SumOfNumberOfEyes(1, terning1, terning2, terning3, terning4, terning5);
-            sum2 = SumOfNumberOfEyes(2, terning1, terning2, terning3, terning4, terning5);
-            sum3 = SumOfNumberOfEyes(3, terning1, terning2, terning3, terning4, terning5);
-            sum4 = SumOfNumberOfEyes(4, terning1, terning2, terning3, terning4, terning5);
-            sum5 = SumOfNumberOfEyes(5, terning1, terning2, terning3, terning4, terning5);
-            sum6 = SumOfNumberOfEyes(6, terning1, terning2, terning3, terning4, terning5);
-
-
-            //
-            // Regler
-            //
-
-            // Ettere
-            if (sum1 >= 1)
-                ettere = true;
-
-            // Toere
-            if (sum2 >= 1)
-                toere = true;
-
-            // Treere
-            if (sum3 >= 1)
-                treere = true;
-
-            // Firere
-            if (sum4 >= 1)
-                firere = true;
-
-            // Femmere
-            if (sum5 >= 1)
-                femmere = true;
-
-            // Seksere
-            if (sum6 >= 1)
-                seksere = true;
-
-            // Et par
-            if ((sum1 >= 2) || (sum2 >= 2) || (sum3 >= 2) || (sum4 >= 2) || (sum5 >= 2) || (sum6 >= 2))
-            {
-                etPar = true;
-                Console.WriteLine("1 par");
-            }
-
-            // To par
-            if (((sum1 >= 2) && (sum2 >= 2)) ||
-                ((sum1 >= 2) && (sum3 >= 2)) ||
-                ((sum1 >= 2) && (sum4 >= 2)) ||
-                ((sum1 >= 2) && (sum5 >= 2)) ||
-                ((sum1 >= 2) && (sum6 >= 2)) ||
-                ((sum2 >= 2) && (sum3 >= 2)) ||
-                ((sum2 >= 2) && (sum4 >= 2)) ||
-                ((sum2 >= 2) && (sum5 >= 2)) ||
-                ((sum2 >= 2) && (sum6 >= 2)) ||
-                ((sum3 >= 2) && (sum4 >= 2)) ||
-                ((sum3 >= 2) && (sum5 >= 2)) ||
-                ((sum3 >= 2) && (sum6 >= 2)) ||
-                ((sum4 >= 2) && (sum5 >= 2)) ||
-                ((sum4 >= 2) && (sum6 >= 2)) ||
-                ((sum5 >= 2) && (sum6 >= 2)))
-            {
-                toPar = true;
-                Console.WriteLine("2 par");
-            }
-
-            // Tre ens
-            if ((sum1 >= 3) || (sum2 >= 3) || (sum3 >= 3) || (sum4 >= 3) || (sum5 >= 3) || (sum6 >= 3))
-            {
-                treEns = true;
-                Console.WriteLine("3 ens");
-            }
-
-            // Fire ens
-            if ((sum1 >= 4) || (sum2 >= 4) || (sum3 >= 4) || (sum4 >= 4) || (sum5 >= 4) || (sum6 >= 4))
-            {
-                fireEns = true;
-                Console.WriteLine("4 ens");
-            }
-
-            // Small straight
-            if ((sum1 == 1) && (sum2 == 1) && (sum3 == 1) && (sum4 == 1) && (sum5 == 1))
-            {
-                smallStraight = true;
-                Console.WriteLine("Small straight");
-            }
-
-
-            //Store straight 
-            if ((sum2 == 1) && (sum3 == 1) && (sum4 == 1) && (sum5 == 1) && (sum6 == 1))
-            {
-                storeStraight = true;
-                Console.WriteLine("Store straight");
-            }
-
-            // Fuldt Hus
-            if (((sum1 == 2) && (sum2 == 3)) ||
-               ((sum1 == 3) && (sum2 == 2)) ||
-               ((sum1 == 2) && (sum3 == 3)) ||
-               ((sum1 == 3) && (sum3 == 2)) ||
-               ((sum1 == 2) && (sum4 == 3)) ||
-               ((sum1 == 3) && (sum4 == 2)) ||
-               ((sum1 == 2) && (sum5 == 3)) ||
-               ((sum1 == 3) && (sum5 == 2)) ||
-               ((sum1 == 2) && (sum6 == 3)) ||
-               ((sum1 == 3) && (sum6 == 2)) ||
-               ((sum2 == 2) && (sum3 == 3)) ||
-               ((sum2 == 3) && (sum3 == 2)) ||
-               ((sum2 == 2) && (sum4 == 3)) ||
-               ((sum2 == 3) && (sum4 == 2)) ||
-               ((sum2 == 2) && (sum5 == 3)) ||
-               ((sum2 == 3) && (sum5 == 2)) ||
-               ((sum2 == 2) && (sum6 == 3)) ||
-               ((sum2 == 3) && (sum6 == 2)) ||
-               ((sum3 == 2) && (sum4 == 3)) ||
-               ((sum3 == 3) && (sum4 == 2)) ||
-               ((sum3 == 2) && (sum5 == 3)) ||
-               ((sum3 == 3) && (sum5 == 2)) ||
-               ((sum2 == 2) && (sum6 == 3)) ||
-               ((sum2 == 3) && (sum6 == 2)) ||
-               ((sum4 == 2) && (sum5 == 3)) ||
-               ((sum4 == 3) && (sum5 == 2)) ||
-               ((sum4 == 2) && (sum6 == 3)) ||
-               ((sum4 == 3) && (sum6 == 2)) ||
-               ((sum5 == 2) && (sum6 == 3)) ||
-               ((sum5 == 3) && (sum6 == 2)))
-            {
-                fuldtHus = true;
-                Console.WriteLine("Fuldt hus");
-            }
-
-
-            // Yatzy
-            if ((sum1 == 5) || (sum2 == 5) || (sum3 == 5) || (sum4 == 5) || (sum5 == 5))
-            {
-                yatzy = true;
-                Console.WriteLine("Yatzy!");
-            }
-
-            // Chancen == Any kombi 
-
-            //Console.ReadKey();
-
-
-            Console.ReadKey();
-
-
-
-            //
-            // Vores Menu og scoreboard
-            //
-
-            Console.BackgroundColor = ConsoleColor.Magenta;
-            Console.ForegroundColor = ConsoleColor.White;
-
-            Console.WriteLine("Velkommen til Team 7's Yatzy-spil!");
-            Console.WriteLine("\n \nDette Yatzy-spil er for 2 spillere.");
-            Console.WriteLine("\n \nTryk på en vilkårlig tast for at starte spillet.");
-            Console.ReadKey();
-            Console.Clear();
-
-            Console.Write("Hver spiller har 15 runder, med 3 kast i hver. \n \nSpiller 1 skal nu kaste sine 5 terninger.\nTryk på en vilkårlig tast for at kaste terningerne.");
-            Console.ReadKey();
-            Console.Clear();
-
-
-
-            
 
             // player 1 variable
             int P1ettere = 0, P1toere = 0, P1treere = 0, P1firere = 0, P1femmere = 0, P1seksere = 0;
@@ -233,112 +78,366 @@
             int P2etPar = 0, P2toPar = 0, P2treEns = 0, P2fireEns = 0, P2lilleStraight = 0, P2storeStraight = 0;
             int P2fuldtHus = 0, P2chance = 0, P2yatzy = 0; //erklæret til player2
 
+            // Variabler der tæller total og bestemmer en vinder
+            int P1result = 0;
+            int P2result = 0;
+
+            // en tæller, der tæller runderne på scoreboardet
+            int roundsCounter = 1;
 
 
-            bool player1 = true; // Bestemmer spillers tur
-
-            bool gyldigKombi = false; // Er der en gyldig kombination - sat til falsk indtil man får en kombi
-            if (ettere || toere || treere || firere || femmere || seksere || etPar || toPar || treEns || fireEns || smallStraight || storeStraight || fuldtHus || yatzy)
-            {
-                gyldigKombi = true;
-            }
 
 
-//              dette loop indeholder:
 
-//              de 15 runder, som er det første 'for' loop,
-//              inde i 'for' loop'et, findes et: 'if' loop, som angiver hvilken spiller der har turen/kastet (hvis player1 = true, så er det første spillers tur)
-//              inde i 'if' loop'et findes endnu et 'for' loop som generer de 3 kast med 5 terninger for den første spiller.
-//              inde i dette 'for' loop findes en switch, hvor forskellige cases angiver terning-kombinationer,
-//              som indeholder en betingelse for om kombinationen er sand
+            //
+            // Vores Start menu
+            //
 
-            
-            for (int rounds = 1; rounds < 16; rounds++) // 15 runder, tælleren er ekskluderende, derfor er værdien sat til 16.
+            //Console.BackgroundColor = ConsoleColor.Magenta;
+            //Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("Velkommen til Team 7's Yatzy-spil!");
+            Console.WriteLine("\n\nDette Yatzy-spil er for 2 spillere.");
+            Console.WriteLine("\n\nTryk på en vilkårlig tast for at starte spillet.");
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.Write("Hver spiller har 15 runder, med 3 kast i hver. \n\nTryk på en vilkårlig tast for at kaste terningerne.");
+            Console.ReadKey();
+            Console.Clear();
+
+
+            //
+            // hoved loop - dette loop indeholder:
+            //
+
+            //  Første 'for' loop: 30 runder (15 for hver spiller)
+            //      inde i 'for' loop'et, findes et: 'if' loop, som angiver hvilken spiller der har turen/kastet (hvis player1 = true, så er det første spillers tur)
+            //          inde i 'if' loop'et findes endnu to 'for' loop, som generer de 3 kast med 5 terninger, ét loop for hver spiller.
+            //              inde i dette 'for' loop findes:
+            //                  Kald til metode 
+            //                  En masse 'if' loops med regler der sætter bools til sandt afhængig af spillerens kast (om en kombination er opnået)
+            //                  En switch der angiver brugerens menuvalg mm.
+
+
+            for (int rounds = 0; rounds < 30; rounds++) // 15 runder for hver spiller
             {
                 if (player1) // Første spillers tur, fordi 'player1' bool er true
                 {
                     for (int p1Roll = 0; p1Roll < 3; p1Roll++) // 3 kast for første spiller
                     {
+
+                        Console.Clear();
+
+                        Console.Write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+                        Console.WriteLine("Runde: " + roundsCounter);
+                        Console.WriteLine("SCOREBOARD:");
+                        Console.WriteLine("------------------ \t {0,3} \t|\t {1,3}", "P1", "P2");
+                        Console.WriteLine("---------1 - 1'ere: \t {0,3} \t|\t {1,3}", P1ettere, P2ettere);
+                        Console.WriteLine("---------2 - 2'ere: \t {0,3} \t|\t {1,3}", P1toere, P2toere);
+                        Console.WriteLine("---------3 - 3'ere: \t {0,3} \t|\t {1,3}", P1treere, P2treere);
+                        Console.WriteLine("---------4 - 4'ere: \t {0,3} \t|\t {1,3}", P1firere, P2firere);
+                        Console.WriteLine("---------5 - 5'ere: \t {0,3} \t|\t {1,3}", P1femmere, P2femmere);
+                        Console.WriteLine("---------6 - 6'ere: \t {0,3} \t|\t {1,3}", P1seksere, P2seksere);
+                        Console.WriteLine("______________________________________________________");
+                        Console.WriteLine("---------------Sum: \t " + (P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere) + " \t|\t " + (P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere));
+                        Console.WriteLine("______________________________________________________");
+                        Console.WriteLine("Bonus v. 63 points: +50 point (ekstra kode indsættes) ");
+
+                        Console.WriteLine("--------A - et par: \t {0,3} \t|\t {1,3}", P1etPar, P2etPar);
+                        Console.WriteLine("--------B - to par: \t {0,3} \t|\t {1,3}", P1toPar, P2toPar);
+                        Console.WriteLine("-------C - tre ens: \t {0,3} \t|\t {1,3}", P1treEns, P2treEns);
+                        Console.WriteLine("------D - fire ens: \t {0,3} \t|\t {1,3}", P1fireEns, P2fireEns);
+
+                        Console.WriteLine("E - lille straight: \t {0,3} \t|\t {1,3}", P1lilleStraight, P2lilleStraight);
+                        Console.WriteLine("-F - stor straight: \t {0,3} \t|\t {1,3}", P1storeStraight, P2storeStraight);
+
+                        Console.WriteLine("-----G - fuldt hus: \t {0,3} \t|\t {1,3}", P1fuldtHus, P2fuldtHus);
+                        Console.WriteLine("--------H - CHANCE: \t {0,3} \t|\t {1,3}", P1chance, P2chance);
+                        Console.WriteLine("---------I - YATZY: \t {0,3} \t|\t {1,3}", P1yatzy, P2yatzy);
+
+                        Console.WriteLine("______________________________________________________");
+                        Console.WriteLine("-------------Total: \t " + (P1result = P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere + P1etPar + P1toPar + P1treEns + P1fireEns + P1lilleStraight + P1storeStraight + P1fuldtHus + P1chance + P1yatzy) + " \t|\t " + (P2result = P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere + P2etPar + P2toPar + P2treEns + P2fireEns + P2lilleStraight + P2storeStraight + P2fuldtHus + P2chance + P2yatzy));
+                        Console.WriteLine("______________________________________________________");
+
+
+
+                        // bools - betingelser for kombinationer sættes til falsk før hvert kast, så man KUN kan sætte point ind et sted på scoreboardet hvis betingelsen er opfyldt på det aktuelle kast
+                        ettere = false;
+                        toere = false;
+                        treere = false;
+                        firere = false;
+                        femmere = false;
+                        seksere = false;
+
+                        etPar = false;
+                        toPar = false;
+                        treEns = false;
+                        fireEns = false;
+                        smallStraight = false;
+
+                        storeStraight = false;
+                        fuldtHus = false;
+                        yatzy = false;
+
                         Console.WriteLine("Spiller 1 kaster sine terninger");
 
-                        // Første spillers tur, det første kast med 5 terninger
+                        // Første spillers tur - kaster med 5 terninger
                         terning1 = r.Next(1, 7);
                         terning2 = r.Next(1, 7);
                         terning3 = r.Next(1, 7);
                         terning4 = r.Next(1, 7);
                         terning5 = r.Next(1, 7);
 
-                        Console.WriteLine($"Terningekast: {terning1}, {terning2}, {terning3}, {terning4}, {terning5}");
+                        Console.WriteLine($"\n{p1Roll + 1}. Terningekast: {terning1}, {terning2}, {terning3}, {terning4}, {terning5}");
+                        Console.WriteLine("\nKombinationer:");
 
-                        Console.WriteLine("\n\nHvad vil du gøre nu?");
-                        Console.Write("Vælg om du vil 1) Kaste igen eller 2) Skrive point på scoreboard");
+                        //SumOfNumberOfEyes(int eyes, int t1, int t2, int t3, int t4, int t5)
+                        sum1 = SumOfNumberOfEyes(1, terning1, terning2, terning3, terning4, terning5);
+                        sum2 = SumOfNumberOfEyes(2, terning1, terning2, terning3, terning4, terning5);
+                        sum3 = SumOfNumberOfEyes(3, terning1, terning2, terning3, terning4, terning5);
+                        sum4 = SumOfNumberOfEyes(4, terning1, terning2, terning3, terning4, terning5);
+                        sum5 = SumOfNumberOfEyes(5, terning1, terning2, terning3, terning4, terning5);
+                        sum6 = SumOfNumberOfEyes(6, terning1, terning2, terning3, terning4, terning5);
+
+                        //
+                        // Regler kontrolleres (hvilke betingelser er opfyldt for hvilke kombinationer)
+                        //
+
+                        // Ettere
+                        if (sum1 >= 1)
+                            ettere = true;
+
+                        // Toere
+                        if (sum2 >= 1)
+                            toere = true;
+
+                        // Treere
+                        if (sum3 >= 1)
+                            treere = true;
+
+                        // Firere
+                        if (sum4 >= 1)
+                            firere = true;
+
+                        // Femmere
+                        if (sum5 >= 1)
+                            femmere = true;
+
+                        // Seksere
+                        if (sum6 >= 1)
+                            seksere = true;
+
+                        // Et par
+                        if ((sum1 >= 2) || (sum2 >= 2) || (sum3 >= 2) || (sum4 >= 2) || (sum5 >= 2) || (sum6 >= 2))
+                        {
+                            etPar = true;
+                            Console.WriteLine("1 par");
+                        }
+
+                        // To par
+                        if (((sum1 >= 2) && (sum2 >= 2)) ||
+                            ((sum1 >= 2) && (sum3 >= 2)) ||
+                            ((sum1 >= 2) && (sum4 >= 2)) ||
+                            ((sum1 >= 2) && (sum5 >= 2)) ||
+                            ((sum1 >= 2) && (sum6 >= 2)) ||
+                            ((sum2 >= 2) && (sum3 >= 2)) ||
+                            ((sum2 >= 2) && (sum4 >= 2)) ||
+                            ((sum2 >= 2) && (sum5 >= 2)) ||
+                            ((sum2 >= 2) && (sum6 >= 2)) ||
+                            ((sum3 >= 2) && (sum4 >= 2)) ||
+                            ((sum3 >= 2) && (sum5 >= 2)) ||
+                            ((sum3 >= 2) && (sum6 >= 2)) ||
+                            ((sum4 >= 2) && (sum5 >= 2)) ||
+                            ((sum4 >= 2) && (sum6 >= 2)) ||
+                            ((sum5 >= 2) && (sum6 >= 2)))
+                        {
+                            toPar = true;
+                            Console.WriteLine("2 par");
+                        }
+
+                        // Tre ens
+                        if ((sum1 >= 3) || (sum2 >= 3) || (sum3 >= 3) || (sum4 >= 3) || (sum5 >= 3) || (sum6 >= 3))
+                        {
+                            treEns = true;
+                            Console.WriteLine("3 ens");
+                        }
+
+                        // Fire ens
+                        if ((sum1 >= 4) || (sum2 >= 4) || (sum3 >= 4) || (sum4 >= 4) || (sum5 >= 4) || (sum6 >= 4))
+                        {
+                            fireEns = true;
+                            Console.WriteLine("4 ens");
+                        }
+
+                        // Small straight
+                        if ((sum1 == 1) && (sum2 == 1) && (sum3 == 1) && (sum4 == 1) && (sum5 == 1))
+                        {
+                            smallStraight = true;
+                            Console.WriteLine("Small straight");
+                        }
+
+
+                        //Store straight 
+                        if ((sum2 == 1) && (sum3 == 1) && (sum4 == 1) && (sum5 == 1) && (sum6 == 1))
+                        {
+                            storeStraight = true;
+                            Console.WriteLine("Store straight");
+                        }
+
+                        // Fuldt Hus
+                        if (((sum1 == 2) && (sum2 == 3)) ||
+                           ((sum1 == 3) && (sum2 == 2)) ||
+                           ((sum1 == 2) && (sum3 == 3)) ||
+                           ((sum1 == 3) && (sum3 == 2)) ||
+                           ((sum1 == 2) && (sum4 == 3)) ||
+                           ((sum1 == 3) && (sum4 == 2)) ||
+                           ((sum1 == 2) && (sum5 == 3)) ||
+                           ((sum1 == 3) && (sum5 == 2)) ||
+                           ((sum1 == 2) && (sum6 == 3)) ||
+                           ((sum1 == 3) && (sum6 == 2)) ||
+                           ((sum2 == 2) && (sum3 == 3)) ||
+                           ((sum2 == 3) && (sum3 == 2)) ||
+                           ((sum2 == 2) && (sum4 == 3)) ||
+                           ((sum2 == 3) && (sum4 == 2)) ||
+                           ((sum2 == 2) && (sum5 == 3)) ||
+                           ((sum2 == 3) && (sum5 == 2)) ||
+                           ((sum2 == 2) && (sum6 == 3)) ||
+                           ((sum2 == 3) && (sum6 == 2)) ||
+                           ((sum3 == 2) && (sum4 == 3)) ||
+                           ((sum3 == 3) && (sum4 == 2)) ||
+                           ((sum3 == 2) && (sum5 == 3)) ||
+                           ((sum3 == 3) && (sum5 == 2)) ||
+                           ((sum2 == 2) && (sum6 == 3)) ||
+                           ((sum2 == 3) && (sum6 == 2)) ||
+                           ((sum4 == 2) && (sum5 == 3)) ||
+                           ((sum4 == 3) && (sum5 == 2)) ||
+                           ((sum4 == 2) && (sum6 == 3)) ||
+                           ((sum4 == 3) && (sum6 == 2)) ||
+                           ((sum5 == 2) && (sum6 == 3)) ||
+                           ((sum5 == 3) && (sum6 == 2)))
+                        {
+                            fuldtHus = true;
+                            Console.WriteLine("Fuldt hus");
+                        }
+
+                        // Yatzy
+                        if ((sum1 == 5) || (sum2 == 5) || (sum3 == 5) || (sum4 == 5) || (sum5 == 5))
+                        {
+                            yatzy = true;
+                            Console.WriteLine("Yatzy!");
+                        }
+
+                        // Menu efter spillerens kast
+                        Console.Write("\n\nVælg om du vil 1) Kaste igen 2) Skrive point på scoreboard: ");
                         diceChoice = Console.ReadLine();
+                        Console.Write("\n\n"); // laver mellemrum mellem hvert kast
 
+                        // Spillerens valg i menuen
                         switch (diceChoice)
                         {
-                            case "1":
+                            case "1": // Hvis spilleren vælger at trykke 1
+                                goto rollAgain; // Gå til switch label 'rollAgain'
+                            rollAgain:
+                                player1 = true;
                                 break;
-                            case "2":
-                                Console.Write("Tast bogstavet ind, som svarer til din kombination: ");
+                            case "2": // Hvis spilleren vælger at skrive sin kombination på scoreboardet (vælger 2 i ovenstående menuen)
+                                Console.Write("Tast bogstavet ind, som svarer til den kombination du vil have point på eller strege: ");
                                 scoreboardChoice = Console.ReadLine();
 
-                                if (gyldigKombi)
+                                switch (scoreboardChoice) // Her kontrolleres for hvad spilleren vælger - Dvs. hvilken position på scoreboardet pointene skal på
                                 {
-                                    switch (scoreboardChoice)
-                                    {
-                                        case "A":
-                                            if (ettere)
-                                                P1ettere = sum1;
-                                            break;
-                                        case "B":
-                                            if (toere)
-                                                P1toere = (sum2 * 2);
-                                            break;
-                                        case "C":
-                                            if (treere)
-                                                P1treere = (sum3 * 3);
-                                            break;
-                                        case "D":
-                                            if (firere)
-                                                P1firere = (sum4 * 4);
-                                            break;
-                                        case "E":
-                                            if (femmere)
-                                                P1femmere = (sum5 * 5);
-                                            break;
-                                        case "F":
-                                            if (seksere)
-                                                P1seksere = (sum6 * 6);
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    case "1":
+                                        player1 = false;
+                                        if (ettere) // Kontrollere at spilleren faktisk har ettere i sit kast
+                                            P1ettere = sum1;
+                                        else        // Ellers, sæt ettere til 0 point - det samme for resten af kombinationerne nedenfor
+                                            P1ettere = 0;
+                                        break;
+                                    case "2":
+                                        player1 = false;
+                                        if (toere)
+                                            P1toere = (sum2 * 2);
+                                        else
+                                            P1toere = 0;
+                                        break;
+                                    case "3":
+                                        player1 = false;
+                                        if (treere)
+                                            P1treere = (sum3 * 3);
+                                        else
+                                            P1treere = 0;
+                                        break;
+                                    case "4":
+                                        player1 = false;
+                                        if (firere)
+                                            P1firere = (sum4 * 4);
+                                        else
+                                            P1firere = 0;
+                                        break;
+                                    case "5":
+                                        player1 = false;
+                                        if (femmere)
+                                            P1femmere = (sum5 * 5);
+                                        else
+                                            P1femmere = 0;
+                                        break;
+                                    case "6":
+                                        player1 = false;
+                                        if (seksere)
+                                            P1seksere = (sum6 * 6);
+                                        else
+                                            P1seksere = 0;
+                                        break;
+                                    default:
+                                        player1 = false;
+                                        break;
                                 }
-                                else if (!gyldigKombi)
-                                {
-                                    break;
-                                }
-                                break;
-                            default:
-                                Console.WriteLine("Du trykkede forkert - game over");
+                                break; // case 2 break
+
+                            default: // denne default sikrer at spiller ikke bare trykker enter uden at vælge noget i menuen og dermed spille for evigt.
                                 player1 = false;
+                                Console.WriteLine("Du valgte ingenting. Du har mistet din tur - ooops!");
                                 break;
                         }
-                        break;
+
+                        //
+                        // Sikring at turen går til anden spiller
+                        //
+
+                        if (player1 == false) // Hvis player1 er falsk bryder den ud af den ud af spilleres 3 kast ('for' loop)
+                            break;
+
+                        if (p1Roll == 2) // Kontrollere at spilleren ikke bruger flere kast end 3 ---- p1Roll 0, 1, 2 (3 kast) ellers sætter den player1 til falsk
+                        {
+                            player1 = false;
+                            break;
+                        }
                     }
+
+                    Console.WriteLine("Tryk på en tast for at gå til næste runde");
+                    Console.ReadKey();
                 }
 
-                else if (player1 == false) // hvis spiller1 falsk er det spiller2's tur
+                else if (player1 == false) // Anden spillers tur, fordi 'player1' bool er false
                 {
-                    for (int p2Roll = 0; p2Roll < 3; p2Roll++) // 3 kast for spiller2
-                    {
+                    Console.WriteLine("\n\n\nNu er det spiller2's tur");
+                    Console.WriteLine("\n\n\n");
+                    Console.ReadKey();
 
-                        //P2ettere = 0;
+                    //
+                    // skal have alt det første spiller har i ovenstående 'for' loop
+                    //
 
-                    }
+                    player1 = true; // I slutningen af player2's tur, sætter vi igen player1 til true (denne slettes når spiller1 kode kopieres ned)       
                 }
 
-                Console.WriteLine("Runde: " + rounds);
+                //
+                // Vores Scoreboard
+                //
+
+                Console.WriteLine("Runde: " + roundsCounter);
                 Console.WriteLine("SCOREBOARD:");
                 Console.WriteLine("------------------ \t {0,3} \t|\t {1,3}", "P1", "P2");
                 Console.WriteLine("---------1 - 1'ere: \t {0,3} \t|\t {1,3}", P1ettere, P2ettere);
@@ -365,23 +464,29 @@
                 Console.WriteLine("---------I - YATZY: \t {0,3} \t|\t {1,3}", P1yatzy, P2yatzy);
 
                 Console.WriteLine("______________________________________________________");
-                Console.WriteLine("-------------Total: \t " + (P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere + P1etPar + P1toPar + P1treEns + P1fireEns + P1lilleStraight + P1storeStraight + P1fuldtHus + P1chance + P1yatzy) + " \t|\t " + (P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere + P2etPar + P2toPar + P2treEns + P2fireEns + P2lilleStraight + P2storeStraight + P2fuldtHus + P2chance + P2yatzy));
+                Console.WriteLine("-------------Total: \t " + (P1result = P1ettere + P1toere + P1treere + P1firere + P1femmere + P1seksere + P1etPar + P1toPar + P1treEns + P1fireEns + P1lilleStraight + P1storeStraight + P1fuldtHus + P1chance + P1yatzy) + " \t|\t " + (P2result = P2ettere + P2toere + P2treere + P2firere + P2femmere + P2seksere + P2etPar + P2toPar + P2treEns + P2fireEns + P2lilleStraight + P2storeStraight + P2fuldtHus + P2chance + P2yatzy));
                 Console.WriteLine("______________________________________________________");
 
 
-                Console.WriteLine("Tryk på en tast for at gå til næste runde");
-                Console.ReadKey();
-                Console.Clear();
+                //Console.WriteLine("Tryk på en tast for at gå til næste runde");
+                //Console.ReadKey();
+                //Console.Clear();
+
+                //if (rounds % 2 != 0)
+                //    roundsCounter++;
             }
 
-            int result1 = 0; //slet disse, kun for at fjerne fejl
-            int result2 = 0; //slet disse, kun for at fjerne fejl 
 
-            if (result1 > result2)
+            //
+            // Resultat! Hvem vandt??
+            //
+
+
+            if (P1result > P2result)
             {
                 Console.WriteLine("Spiller 1 har vundet");
             }
-            else if (result1 < result2)
+            else if (P1result < P2result)
             {
                 Console.WriteLine("Spiller 2 har vundet");
             }
@@ -400,6 +505,97 @@
 
 
 
+
+
+
+
+
+
+
+////
+//// Første version MED gyldigKombi bool - slettet i den nye version
+////
+
+//// Hvis én eller flere af ovenstående bools blive sande efter spillerens kast, sættes bool gyldigKombi, til sand
+//if (ettere || toere || treere || firere || femmere || seksere || etPar || toPar || treEns || fireEns || smallStraight || storeStraight || fuldtHus || yatzy)
+//    gyldigKombi = true;
+
+//// Menu efter spillerens kast
+//Console.Write("\n\nVælg om du vil 1) Kaste igen 2) Skrive point på scoreboard: ");
+//diceChoice = Console.ReadLine();
+
+//// Spillerens valg i menuen
+//switch (diceChoice)
+//{
+//    case "1": // Hvis spilleren vælger at trykke 1
+//        break;
+//    case "2": // Hvis spilleren vælger at skrive sin kombination på scoreboardet (vælger 2 i ovenstående menuen)
+//        Console.Write("Tast bogstavet ind, som svarer til din kombination: ");
+//        scoreboardChoice = Console.ReadLine();
+
+//        if (gyldigKombi) // Hvis en eller flere af regel-bools blev sande (&&) spilleren valgte 2 i menuen
+//        {
+//            switch (scoreboardChoice) // Så vælger spilleren hvilken position på scoreboardet pointene skal på
+//            {
+//                case "A":
+//                    if (ettere) // Kontrollere at spilleren faktisk har ettere i sit kast
+//                        P1ettere = sum1;
+//                    else        // Ellers, sæt ettere til 0 point - det samme for resten af kombinationerne nedenfor
+//                        P1ettere = 0;
+//                    break;
+//                case "B":
+//                    if (toere)
+//                        P1toere = (sum2 * 2);
+//                    else
+//                        P1ettere = 0;
+//                    break;
+//                case "C":
+//                    if (treere)
+//                        P1treere = (sum3 * 3);
+//                    else
+//                        P1ettere = 0;
+//                    break;
+//                case "D":
+//                    if (firere)
+//                        P1firere = (sum4 * 4);
+//                    else
+//                        P1ettere = 0;
+//                    break;
+//                case "E":
+//                    if (femmere)
+//                        P1femmere = (sum5 * 5);
+//                    else
+//                        P1ettere = 0;
+//                    break;
+//                case "F":
+//                    if (seksere)
+//                        P1seksere = (sum6 * 6);
+//                    else
+//                        P1ettere = 0;
+//                    break;
+//                default:
+//                    Console.WriteLine("Du trykkede forkert - Game Over");
+//                    break;
+//            }
+//        }
+//        player1 = false;
+//        break;
+//        //default:
+//        //    Console.WriteLine("Du trykkede forkert - Game Over");
+//        //    player1 = false;
+//        //    break;
+//}
+
+
+
+
+
+
+
+
+////
+//// Array og Math metode til at tælle terningerne i stedet for Thomas' metode!
+//// 
 
 
 //using System;
