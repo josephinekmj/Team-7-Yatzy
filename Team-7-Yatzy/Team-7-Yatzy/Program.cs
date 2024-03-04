@@ -27,7 +27,6 @@ namespace Team_7_Yatzy
             // #5: Spiller #2 er ikke med i spillet endnu
             
 
-
             //
             // Variabler
             //
@@ -101,7 +100,6 @@ namespace Team_7_Yatzy
             int bonus2 = 0;
 
 
-
             //
             // Vores Start menu
             //
@@ -115,7 +113,7 @@ namespace Team_7_Yatzy
             Console.ReadKey();
             Console.Clear();
 
-            Console.Write("Hver spiller har 15 runder, med 3 kast i hver. \n\nTryk på en vilkårlig tast for at kaste terningerne.");
+            Console.Write("Hver spiller har 15 runder med op til 3 terningekast i hver. \n\nSpiller 1 - tryk på en vilkårlig tast for at kaste terningerne og starte spillet.");
             Console.ReadKey();
             Console.Clear();
 
@@ -200,23 +198,23 @@ namespace Team_7_Yatzy
                         Console.WriteLine("Spiller 1 kaster sine terninger");
 
                         // Første spillers tur - kaster med 5 terninger
-                        //terning1 = r.Next(1, 7);
-                        //terning2 = r.Next(1, 7);
-                        //terning3 = r.Next(1, 7);
-                        //terning4 = r.Next(1, 7);
-                        //terning5 = r.Next(1, 7); 
-                        
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        terning1 = r.Next(1, 7);
+                        terning2 = r.Next(1, 7);
+                        terning3 = r.Next(1, 7);
+                        terning4 = r.Next(1, 7);
+                        terning5 = r.Next(1, 7);
 
-                        terning1 = 2;
-                        terning2 = 3;
-                        terning3 = 4;
-                        terning4 = 5;
-                        terning5 = 6;
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //terning1 = 1;
+                        //terning2 = 1;
+                        //terning3 = 4;
+                        //terning4 = 6;
+                        //terning5 = 6;
 
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+                         
                         Console.WriteLine($"\n{p1Roll + 1}. Terningekast: {terning1}, {terning2}, {terning3}, {terning4}, {terning5}");
                         Console.WriteLine("\nKombinationer:");
 
@@ -420,16 +418,58 @@ namespace Team_7_Yatzy
                                     case "A":
                                         player1 = false;
                                         if (etPar)
-                                            if (terning1 == terning2)
-                                                P1etPar = (terning1 + terning2);
-                                            else if (terning1 == terning3)
-                                                P1etPar = (terning1 + terning3);
-                                            else if (terning1 == terning4)
-                                                P1etPar = (terning1 + terning4);
-                                            else if (terning1 == terning5)
-                                                P1etPar = (terning1 + terning5);
-                                        else
-                                            P1etPar = 0;
+                                            if ((terning1 == terning2) || (terning1 == terning3) || (terning1 == terning4) || (terning1 == terning5))
+                                                if (terning1 == 6)
+                                                    P1etPar = 12;
+                                                else if (terning1 == 5)
+                                                    P1etPar = 10;
+                                                else if (terning1 == 4)
+                                                    P1etPar = 8;
+                                                else if (terning1 == 3)
+                                                    P1etPar = 6;
+                                                else if (terning1 == 2)
+                                                    P1etPar = 4;
+                                                else if (terning1 == 1)
+                                                    P1etPar = 2;
+                                            if ((terning2 == terning3) || (terning2 == terning4) || (terning2 == terning5))
+                                                if (terning2 == 6)
+                                                    P1etPar = 12;
+                                                else if (terning2 == 5)
+                                                    P1etPar = 10;
+                                                else if (terning2 == 4)
+                                                    P1etPar = 8;
+                                                else if (terning2 == 3)
+                                                    P1etPar = 6;
+                                                else if (terning2 == 2)
+                                                    P1etPar = 4;
+                                                else if (terning2 == 1)
+                                                    P1etPar = 2;
+                                            if ((terning3 == terning4) || (terning3 == terning5))
+                                                if (terning3 == 6)
+                                                    P1etPar = 12;
+                                                else if (terning3 == 5)
+                                                    P1etPar = 10;
+                                                else if (terning3 == 4)
+                                                    P1etPar = 8;
+                                                else if (terning3 == 3)
+                                                    P1etPar = 6;
+                                                else if (terning3 == 2)
+                                                    P1etPar = 4;
+                                                else if (terning3 == 1)
+                                                    P1etPar = 2;
+                                            if (terning4 == terning5)
+                                                if (terning4 == 6)
+                                                    P1etPar = 12;
+                                                else if (terning4 == 5)
+                                                    P1etPar = 10;
+                                                else if (terning4 == 4)
+                                                    P1etPar = 8;
+                                                else if (terning4 == 3)
+                                                    P1etPar = 6;
+                                                else if (terning4 == 2)
+                                                    P1etPar = 4;
+                                                else if (terning4 == 1)
+                                                    P1etPar = 2;
                                         break;
                                     case "B":
                                         player1 = false;
@@ -441,13 +481,17 @@ namespace Team_7_Yatzy
                                             else if ((terning1 == terning2) && (terning3 == terning5) ||
                                                     (terning1 == terning3) && (terning2 == terning5) ||
                                                     (terning1 == terning5) && (terning2 == terning3))
-                                                    P1toPar = (terning1 + terning2 + terning3 + terning5);
+                                                P1toPar = (terning1 + terning2 + terning3 + terning5);
                                             else if ((terning1 == terning2) && (terning4 == terning5) ||
                                                     (terning1 == terning4) && (terning2 == terning5) ||
                                                     (terning1 == terning5) && (terning2 == terning4))
-                                                    P1toPar = (terning1 + terning2 + terning4 + terning5);
-                                        else
-                                            P1toPar = 0;
+                                                P1toPar = (terning1 + terning2 + terning4 + terning5);
+                                            else if ((terning2 == terning3) && (terning4 == terning5) ||
+                                                    (terning2 == terning4) && (terning3 == terning5) ||
+                                                    (terning2 == terning5) && (terning3 == terning4))
+                                                P1toPar = (terning2 + terning3 + terning4 + terning5);
+                                            else
+                                                P1toPar = 0;
                                         break;
                                     case "C":
                                         player1 = false;
@@ -550,7 +594,7 @@ namespace Team_7_Yatzy
 
                 else if (player1 == false) // Anden spillers tur, fordi 'player1' bool er false
                 {
-                    Console.WriteLine("\n\n\nNu er det spiller2's tur");
+                    Console.WriteLine("\n\n\nNu er det Spiller 2's tur");
                     Console.WriteLine("\n\n\n");
                     Console.ReadKey();
 
@@ -614,22 +658,22 @@ namespace Team_7_Yatzy
 
             if (P1result > P2result)
             {
-                Console.WriteLine("Spiller 1 har vundet");
+                Console.WriteLine("Spiller 1 har vundet - tillykke!");
             }
             else if (P1result < P2result)
             {
-                Console.WriteLine("Spiller 2 har vundet");
+                Console.WriteLine("Spiller 2 har vundet - tillykke!");
             }
             else
             {
                 Console.WriteLine("Spillet endte uafgjort!");
             }
 
-            Console.WriteLine("");
-            Console.WriteLine("Tryk på en vilkårlig tast for at afslutte spillet.");
+            Console.WriteLine("\nTryk på en vilkårlig tast for at afslutte spillet.");
             Console.ReadKey();
 
         }
+
     }
 }
 
