@@ -23,9 +23,10 @@ namespace Team_7_Yatzy
             // Known Bugs
             //
 
-            // Kan ikke gemme terninger gennem hvert kast endnu
-            // Vi var igang med at løse problemet - løkker, arrays, lidt om lister
-            
+            // Enkelte terninger kan ikke gemmes mellem hvert kast. - Vi ville løse dette med løkker, arrays / lister
+            // Man kan ikke strege en kombination - Vi ville løse dette med bools, og conditionals
+            // Mister tur ved fejlinput
+
 
             //
             // Variabler
@@ -45,7 +46,7 @@ namespace Team_7_Yatzy
             bool fireEns = false;
             bool smallStraight = false;
 
-            bool storeStraight = false;
+            bool storeStraight = false; 
             bool fuldtHus = false;
             bool yatzy = false;
 
@@ -113,7 +114,10 @@ namespace Team_7_Yatzy
             Console.ReadKey();
             Console.Clear();
 
-            Console.Write("Hver spiller har 15 runder med op til 3 terningekast i hver. \n\nSpiller 1 - tryk på en vilkårlig tast for at kaste terningerne og starte spillet.");
+            Console.WriteLine("Hver spiller har 15 runder med op til 3 terningekast i hver.");
+            Console.WriteLine("Enkelte terninger kan ikke gemmes mellem hvert kast.");
+            Console.WriteLine("Bortset fra det er reglerne de samme som i Standard-Yatzy.");
+            Console.WriteLine("\n\nSpiller 1 - tryk på en vilkårlig tast for at kaste terningerne og starte spillet.");
             Console.ReadKey();
             Console.Clear();
 
@@ -205,6 +209,7 @@ namespace Team_7_Yatzy
                         terning5 = r.Next(1, 7);
 
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //Terninger til test:
 
                         //terning1 = 1;
                         //terning2 = 1;
@@ -214,7 +219,7 @@ namespace Team_7_Yatzy
 
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                         
+
                         Console.WriteLine($"\n{p1Roll + 1}. Terningekast: {terning1}, {terning2}, {terning3}, {terning4}, {terning5}");
                         Console.WriteLine("\nKombinationer:");
 
@@ -487,16 +492,20 @@ namespace Team_7_Yatzy
                                                 (terning1 == terning4) && (terning2 == terning3))
                                                 P1toPar = (terning1 + terning2 + terning3 + terning4);
                                             else if ((terning1 == terning2) && (terning3 == terning5) ||
-                                                    (terning1 == terning3) && (terning2 == terning5) ||
-                                                    (terning1 == terning5) && (terning2 == terning3))
+                                                (terning1 == terning3) && (terning2 == terning5) ||
+                                                (terning1 == terning5) && (terning2 == terning3))
                                                 P1toPar = (terning1 + terning2 + terning3 + terning5);
                                             else if ((terning1 == terning2) && (terning4 == terning5) ||
-                                                    (terning1 == terning4) && (terning2 == terning5) ||
-                                                    (terning1 == terning5) && (terning2 == terning4))
+                                                (terning1 == terning4) && (terning2 == terning5) ||
+                                                (terning1 == terning5) && (terning2 == terning4))
                                                 P1toPar = (terning1 + terning2 + terning4 + terning5);
-                                            else if ((terning2 == terning3) && (terning4 == terning5) ||
-                                                    (terning2 == terning4) && (terning3 == terning5) ||
-                                                    (terning2 == terning5) && (terning3 == terning4))
+                                            else if ((terning1 == terning3) && (terning4 == terning5) ||
+                                                (terning1 == terning4) && (terning3 == terning5) ||
+                                                (terning1 == terning5) && (terning3 == terning4))
+                                                P1toPar = (terning1 + terning3 + terning4 + terning5);
+                                            else if ((terning2 == terning4) && (terning3 == terning5) ||
+                                                (terning2 == terning3) && (terning4 == terning5) ||
+                                                (terning2 == terning5) && (terning3 == terning4))
                                                 P1toPar = (terning2 + terning3 + terning4 + terning5);
                                             else
                                                 P1toPar = 0;
